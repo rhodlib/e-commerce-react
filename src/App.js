@@ -1,12 +1,13 @@
 import React from 'react';
 import './styles.css';
 import NavBar from './components/NavBar';
+import ItemListContainer from './components/ItemListContainer';
 
 const App = function() {
     return (
         <>
             <NavBar/>
-            <h2>Las ofertas de la semana</h2>
+            <ItemListContainer greeting="Titulo provisional!"/>
         </>
     )
 }
