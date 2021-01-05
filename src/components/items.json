@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "title": "Detergente",
+        "price": 400,
+        "pictureUrl": "https://statics.dinoonline.com.ar/imagenes/full_600x600_ma/2790506_1_f.jpg"
+    },{
+        "id": 2,
+        "title": "Lavandina",
+        "price": 350,
+        "pictureUrl": "https://perfumeriaspigmento.com.ar/media/catalog/product/cache/image/620x678/e9c3970ab036de70892d86c6d221abfe/7/7/7793253001384_01.jpg"
+    }, {
+        "id": 3,
+        "title": "Jabon Liquido",
+        "price": 200,
+        "pictureUrl": "https://supermercado.carrefour.com.ar/media/catalog/product/cache/1/image/1000x/040ec09b1e35df139433887a97daa66f/7/7/7798096056027_02.jpg"
+    }
+]
