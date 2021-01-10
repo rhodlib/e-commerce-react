@@ -23,7 +23,6 @@ const ItemListContainer = ({ greeting }) => {
   return (
     <>
       <p className={styles.container}>{greeting}</p>
-      <ItemCount stock={5} initial={1} onAdd={console.log} />
       <ItemList items={items}/>
     </>
   );

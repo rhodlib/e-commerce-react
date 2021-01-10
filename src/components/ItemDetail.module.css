@@ -1,0 +1,20 @@
+.itemDetail {
+    display: flex;
+    width: 800px;
+}
+
+.productDetail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.image {
+    display: block;
+    width: 60%;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 50px;
+}
