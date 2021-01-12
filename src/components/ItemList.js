@@ -2,7 +2,7 @@ import React from "react";
 import Item from "./Item";
 import styles from "./ItemList.module.css";
 
-const ItemList = ({ items }) => {
+const ItemList = ({ items = []}) => {
   return (
     <div className={styles.itemList}>
       {items.map((item) => (

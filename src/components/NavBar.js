@@ -1,35 +1,35 @@
 import React from "react";
 import CartWidget from "./CartWidget";
 import styles from "./NavBar.module.css";
+import {Link, NavLink} from 'react-router-dom';
 
 const NavBar = () => {
   return (
       <nav className={styles.navBar}>
-        <div className={styles.brand}>
-          <CartWidget fill="#FFF" width="60px" height="60px" />
-          <h3 className={styles.title}>3D-Print Shop</h3>
-        </div>
+        <Link to={`/`} className={styles.brand}>
+          <h3 className={styles.title}>eCommerce</h3>
+        </Link>
 
         <ul className={styles.list}>
           <li className={styles.listItem}>
-            <a href="/#" className={styles.listLink}>
+            <NavLink to={`/`} className={styles.listLink}>
               Inicio
-            </a>
+            </NavLink>
           </li>
           <li className={styles.listItem}>
-            <a href="/#" className={styles.listLink}>
-              Productos
-            </a>
+            <NavLink to={`/category/1`} className={styles.listLink} activeClassName={styles.activeLink}>
+              Limpieza
+            </NavLink>
           </li>
           <li className={styles.listItem}>
-            <a href="/#" className={styles.listLink}>
-              Contacto
-            </a>
+            <NavLink to={`/category/2`} className={styles.listLink} activeClassName={styles.activeLink}>
+              Golosinas
+            </NavLink>
           </li>
           <li className={styles.listItem}>
-            <a href="/#" className={styles.listLink}>
-              About
-            </a>
+            <Link to={`/cart`} className={styles.listLink}>
+              <CartWidget fill="#FFF" width="32px" height="32px" />
+            </Link>
           </li>
         </ul>
       </nav>

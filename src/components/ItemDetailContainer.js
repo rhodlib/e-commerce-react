@@ -1,42 +1,45 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import ItemDetail from "./ItemDetail";
+import itemsJSON from "./items.json";
+import styles from "./ItemDetailContainer.module.css";
 
 //Item Mock
 const getItem = () => {
-  const response = {
-    id: 1,
-    title: "Detergente",
-    price: 400,
-    pictureUrl:
-      "https://statics.dinoonline.com.ar/imagenes/full_600x600_ma/2790506_1_f.jpg",
-    description:
-      "Ala Plus Detergente Cremoso con Glicerina, es un detergente para lavavajillas que contiene agentes de limpieza que te ayudan en el lavado de la vajilla de cocina diaria, removiendo la grasa difícil y la suciedad, y logrando un resultado brillante y un desengrase total de todos tus platos y de toda tu vajilla.",
-  };
-
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve(response);
+      resolve(itemsJSON);
     }, 2000);
   });
 };
 
 const ItemDetailContainer = () => {
+  const { itemId } = useParams();
+  console.log(itemId);
   const [item, setItem] = useState({});
 
   useEffect(() => {
     getItem()
-      .then((res) => setItem(res))
+      .then((res) => setItem(res.find((item) => item.id === Number(itemId))))
       .catch((err) => console.log(err));
-  }, []);
+  }, [itemId]);
 
+  console.log(item)
   return (
-          <ItemDetail
-            id={item.id}
-            title={item.title}
-            price={item.price}
-            pictureUrl={item.pictureUrl}
-            description={item.description}
-          />
+    <div className={styles.container}>
+      {item.pictureUrl === undefined ? (
+        <p>Cargando..</p>
+      ) : (
+        <ItemDetail
+          id={item.id}
+          title={item.title}
+          price={item.price}
+          pictureUrl={item.pictureUrl}
+          description={item.description}
+          stock={item.stock}
+        />
+      )}
+    </div>
   );
 };
 

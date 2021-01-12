@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styles from "./ItemListContainer.module.css";
 import itemsJSON from "./items.json";
-import ItemCount from "./ItemCount";
 import ItemList from "./ItemList";
 
 //Async Mock
@@ -12,18 +12,19 @@ const promise = new Promise((resolve, reject) => {
 });
 
 const ItemListContainer = ({ greeting }) => {
+  const { categoryId } = useParams();
   const [items, setItems] = useState([]);
 
   useEffect(() => {
     promise
-      .then((response) => setItems(response))
-      .catch((err) => console.log(err));
-  }, []);
+      .then((response) => (categoryId === undefined) ? setItems(response) : setItems(response.filter(item => item.category === Number(categoryId))))
+      .catch((err) => console.log(err))
+  }, [categoryId]);
 
   return (
     <>
       <p className={styles.container}>{greeting}</p>
-      <ItemList items={items}/>
+      { items.length === 0 ? <p className={styles.loading}>Cargando Lista</p> : <ItemList items={items}/> }
     </>
   );
 };
