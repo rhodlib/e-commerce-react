@@ -18,3 +18,18 @@
     text-align: center;
     margin-bottom: 50px;
 }
+
+.toCartButton {
+    width: 120px;
+    background-color: #FFEB3B;
+    text-align: center;
+    text-decoration: none;
+    padding: 5px;
+    outline: black;
+    border-radius: 3px;
+    border: none;
+}
+
+.toCartButton:hover {
+    cursor: pointer;
+}

@@ -23,7 +23,7 @@ const ItemCount = ({stock, initial, onAdd}) => {
                 <span className={styles.counter}>{counter}</span>
                 <button className={styles.controlButton} onClick={increment}>+</button>
             </div>
-            <button className={styles.onAddButton} onClick={stock ? ()=> onAdd(counter): null}>Agregar al carrito</button>
+            <button className={styles.onAddButton} onClick={() => onAdd(counter)}>Agregar al carrito</button>
         </div>
     )
 }

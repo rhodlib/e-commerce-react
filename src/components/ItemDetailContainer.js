@@ -15,7 +15,6 @@ const getItem = () => {
 
 const ItemDetailContainer = () => {
   const { itemId } = useParams();
-  console.log(itemId);
   const [item, setItem] = useState({});
 
   useEffect(() => {
@@ -24,12 +23,9 @@ const ItemDetailContainer = () => {
       .catch((err) => console.log(err));
   }, [itemId]);
 
-  console.log(item)
   return (
     <div className={styles.container}>
-      {item.pictureUrl === undefined ? (
-        <p>Cargando..</p>
-      ) : (
+      {item ? (
         <ItemDetail
           id={item.id}
           title={item.title}
@@ -38,7 +34,7 @@ const ItemDetailContainer = () => {
           description={item.description}
           stock={item.stock}
         />
-      )}
+      ): <p>Cargando..</p>}
     </div>
   );
 };
