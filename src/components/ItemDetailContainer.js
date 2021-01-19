@@ -25,16 +25,15 @@ const ItemDetailContainer = () => {
 
   return (
     <div className={styles.container}>
-      {item ? (
-        <ItemDetail
+        {Object.entries(item).length !== 0 ? <ItemDetail
           id={item.id}
           title={item.title}
           price={item.price}
           pictureUrl={item.pictureUrl}
           description={item.description}
           stock={item.stock}
-        />
-      ): <p>Cargando..</p>}
+        /> : <p>cargando...</p>
+        }
     </div>
   );
 };

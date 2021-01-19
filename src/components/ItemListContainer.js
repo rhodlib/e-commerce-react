@@ -17,14 +17,24 @@ const ItemListContainer = ({ greeting }) => {
 
   useEffect(() => {
     promise
-      .then((response) => (categoryId === undefined) ? setItems(response) : setItems(response.filter(item => item.category === Number(categoryId))))
-      .catch((err) => console.log(err))
-  }, [categoryId]);
+      .then((response) => setItems(response))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <>
       <p className={styles.container}>{greeting}</p>
-      { items.length === 0 ? <p className={styles.loading}>Cargando Lista</p> : <ItemList items={items}/> }
+      {items.length === 0 ? (
+        <p className={styles.loading}>Cargando Lista</p>
+      ) : (
+        <ItemList
+          items={
+            categoryId === undefined
+              ? items
+              : items.filter((item) => item.category === Number(categoryId))
+          }
+        />
+      )}
     </>
   );
 };
