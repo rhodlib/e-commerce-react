@@ -3,6 +3,7 @@ import './styles.css';
 import NavBar from './components/NavBar';
 import ItemListContainer from './components/ItemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer';
+import Cart from './components/Cart';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import CustomContext from "./context/CartContext";
 
@@ -21,6 +22,9 @@ const App = function() {
                     </Route>
                     <Route path="/item/:itemId">
                         <ItemDetailContainer/>
+                    </Route>
+                    <Route path="/cart">
+                        <Cart/>
                     </Route>
                 </Switch>
             </Router>

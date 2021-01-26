@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ItemDetail from "./ItemDetail";
 import itemsJSON from "./items.json";
+import Loader from './Loader';
 import styles from "./ItemDetailContainer.module.css";
 
 //Item Mock
@@ -32,7 +33,7 @@ const ItemDetailContainer = () => {
           pictureUrl={item.pictureUrl}
           description={item.description}
           stock={item.stock}
-        /> : <p>cargando...</p>
+        /> : <Loader/>
         }
     </div>
   );

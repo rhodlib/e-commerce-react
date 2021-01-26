@@ -1,0 +1,19 @@
+.cartWidgetContainer {
+    display: flex;
+    align-items: center;
+}
+
+.cartCantItems {
+    font-size: 12px;
+    position: relative;
+    right: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    width: 21px;
+    height: 21px;
+    background-color: red;
+    border: 1px solid #FFF;
+    border-radius: 50%;
+}

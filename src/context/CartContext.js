@@ -10,7 +10,7 @@ export default function CustomContext({ defaultValue = [], children }) {
   };
 
   const removeItem = (id) => {
-    setCart(cart.map((item) => item.id !== id));
+    setCart(cart.filter(({item}) => item.id !== Number(id)));
   };
 
   const addItem = ({item, quantity}) => {
@@ -26,8 +26,12 @@ export default function CustomContext({ defaultValue = [], children }) {
     setCart([]);
   };
 
+  const totalItems = () => {
+    return cart.reduce((total, {quantity}) => total + quantity, 0);
+  }
+
   return (
-    <CartContext.Provider value={{ cart, addItem, isInCart, removeItem, clear }}>
+    <CartContext.Provider value={{ cart, addItem, isInCart, removeItem, clear, totalItems }}>
       {children}
     </CartContext.Provider>
   );
