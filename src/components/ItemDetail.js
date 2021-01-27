@@ -4,14 +4,14 @@ import styles from "./ItemDetail.module.css";
 import ItemCount from './ItemCount';
 import {CartContext} from "../context/CartContext";
 
-const ItemDetail = ({ id, title, price, pictureUrl, description, stock }) => {
+const ItemDetail = ({ id, title, price, image, description, stock }) => {
     const [cant, setCant] = useState(0);
 
     const myContext = useContext(CartContext);
 
     const onAdd = (counter) => {
         setCant(counter);
-        myContext.addItem({item: {id, title, price, pictureUrl}, quantity: counter})
+        myContext.addItem({item: {id, title, price, image}, quantity: counter})
     }
 
     const renderButtons = (cant) => {
@@ -20,7 +20,7 @@ const ItemDetail = ({ id, title, price, pictureUrl, description, stock }) => {
 
     return(
         <div className={styles.itemDetail}>
-            <img className={styles.image} src={pictureUrl} alt={title}/>
+            <img className={styles.image} src={image} alt={title}/>
             <div className={styles.productDetail}>
                 <h2 className={styles.title}>{title}</h2>
                 <p>{price}</p>

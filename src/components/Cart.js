@@ -13,7 +13,7 @@ const Cart = () => {
                     total += item.price * quantity;
                     return (
                         <li className={Styles.cartItem} key={item.id}>
-                            <img className={Styles.img} src={item.pictureUrl}/>
+                            <img className={Styles.img} src={item.image}/>
                             <p>{item.title} x {quantity}</p>
                             <p>{item.price * quantity}</p>
                             <button onClick={() => myContext.removeItem(item.id)}>Eliminar</button>
