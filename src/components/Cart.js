@@ -1,28 +1,86 @@
-import React, {useContext} from 'react';
-import { Link } from 'react-router-dom';
-import {CartContext} from '../context/CartContext';
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { getFirestore } from "../database/firebase";
+import firebase from "firebase/app";
+import "@firebase/firestore";
+import { CartContext } from "../context/CartContext";
 import Styles from "./Cart.module.css";
+import Loader from "./Loader";
+
+const userInfo = {
+  name: "rodo",
+  phone: "223665997",
+  email: "rhodlib@gmail.com",
+};
+
+const db = getFirestore();
 
 const Cart = () => {
-    const myContext = useContext(CartContext);
-    let total = 0;
-    return (
-        myContext.cart.length ?
-            <ul className={Styles.cartContainer}>
-                {myContext.cart.map(({item, quantity}) => {
-                    total += item.price * quantity;
-                    return (
-                        <li className={Styles.cartItem} key={item.id}>
-                            <img className={Styles.img} src={item.image}/>
-                            <p>{item.title} x {quantity}</p>
-                            <p>{item.price * quantity}</p>
-                            <button onClick={() => myContext.removeItem(item.id)}>Eliminar</button>
-                        </li>
-                    )
-                })}
-                <li> Total: {total}</li>
-            </ul> : <p>No hay productos en el carrito <Link to="/">Ir a comprar</Link></p>
-    )
-}
+  const [orderId, setOrderId] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const myContext = useContext(CartContext);
+  const orders = db.collection("orders");
+  const newOrder = {
+    buyer: userInfo,
+    items: [...myContext.cart],
+    date: firebase.firestore.Timestamp.fromDate(new Date()),
+    total: myContext.totalPrice(),
+  };
+
+  const onClickOrder = () => {
+    setLoading(true);
+    orders
+      .add(newOrder)
+      .then(({ id }) => {
+        setOrderId(id);
+
+        const collection = db.collection("items");
+        
+        myContext.cart.forEach(({item, quantity}) => {
+            const batch = db.batch();
+            let doc = collection.doc(item.id);
+            doc.get().then(itm => {
+                batch.update(doc, {stock: itm.data().stock - quantity});
+            }).then(() => batch.commit());
+        })        
+    }).catch((err) => {
+        setError(err);
+    }).finally(() => {
+        setLoading(false)
+        myContext.clear();
+    });
+    
+  };
+
+  return loading ? (
+    <Loader />
+  ) : orderId ? (
+    <p>Su order Id es : {orderId}</p>
+  ) : myContext.cart.length ? (
+    <ul className={Styles.cartContainer}>
+      {myContext.cart.map(({ item, quantity }) => {
+        return (
+          <li className={Styles.cartItem} key={item.id}>
+            <img className={Styles.img} src={item.image} />
+            <p>
+              {item.title} x {quantity}
+            </p>
+            <p>{item.price * quantity}</p>
+            <button onClick={() => myContext.removeItem(item.id)}>
+              Eliminar
+            </button>
+          </li>
+        );
+      })}
+      <li> Total:{myContext.totalPrice()}</li>
+      <button onClick={onClickOrder}>Comprar</button>
+    </ul>
+  ) : (
+    <p>
+      No hay productos en el carrito <Link to="/">Ir a comprar</Link>
+    </p>
+  );
+};
 
 export default Cart;

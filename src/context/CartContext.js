@@ -10,7 +10,7 @@ export default function CustomContext({ defaultValue = [], children }) {
   };
 
   const removeItem = (id) => {
-    setCart(cart.filter(({item}) => item.id !== Number(id)));
+    setCart(cart.filter(({item}) => item.id !== id));
   };
 
   const addItem = ({item, quantity}) => {
@@ -30,8 +30,14 @@ export default function CustomContext({ defaultValue = [], children }) {
     return cart.reduce((total, {quantity}) => total + quantity, 0);
   }
 
+  const totalPrice = () => {
+    let total = 0;
+    cart.forEach(({item, quantity}) => total += item.price * quantity);
+    return total;
+  }
+
   return (
-    <CartContext.Provider value={{ cart, addItem, isInCart, removeItem, clear, totalItems }}>
+    <CartContext.Provider value={{ cart, addItem, isInCart, removeItem, clear, totalItems, totalPrice }}>
       {children}
     </CartContext.Provider>
   );
