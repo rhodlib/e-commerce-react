@@ -1,38 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import CartWidget from "./CartWidget";
-import styles from "./NavBar.module.css";
-import {Link, NavLink} from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { Header, Menu} from "semantic-ui-react";
 
 const NavBar = () => {
-  return (
-      <nav className={styles.navBar}>
-        <Link to={`/`} className={styles.brand}>
-          <h3 className={styles.title}>eCommerce</h3>
-        </Link>
+  const [activeItem, setActiveItem] = useState("");
 
-        <ul className={styles.list}>
-          <li className={styles.listItem}>
-            <NavLink to={`/`} className={styles.listLink}>
-              Inicio
-            </NavLink>
-          </li>
-          <li className={styles.listItem}>
-            <NavLink to={`/category/1`} className={styles.listLink} activeClassName={styles.activeLink}>
-              Limpieza
-            </NavLink>
-          </li>
-          <li className={styles.listItem}>
-            <NavLink to={`/category/2`} className={styles.listLink} activeClassName={styles.activeLink}>
-              Golosinas
-            </NavLink>
-          </li>
-          <li className={styles.listItem}>
-            <Link to={`/cart`} className={styles.listLink}>
-              <CartWidget fill="#FFF" width="32px" height="32px" />
-            </Link>
-          </li>
-        </ul>
-      </nav>
+  return (
+    <Menu color="teal" fixed="top" inverted widths={5}>
+      <Menu.Item name="brand" as={Link} to={"/"}>
+        <Header as="h3">ClothShop</Header>
+      </Menu.Item>
+      <Menu.Item
+        name="inicio"
+        active={activeItem === "inicio"}
+        onClick={(e, { name }) => setActiveItem(name)}
+        as={Link}
+        to={"/"}
+      >
+        Inicio
+      </Menu.Item>
+      <Menu.Item
+        name="hoodies"
+        active={activeItem === "hoodies"}
+        onClick={(e, { name }) => setActiveItem(name)}
+        as={Link}
+        to={"/category/1"}
+      >
+        Hoodies
+      </Menu.Item>
+      <Menu.Item
+        name="remeras"
+        active={activeItem === "remeras"}
+        onClick={(e, { name }) => setActiveItem(name)}
+        as={Link}
+        to={"/category/2"}
+      >
+        Remeras
+      </Menu.Item>
+      <Menu.Item
+        name="cart"
+        active={activeItem === "cart"}
+        onClick={(e, { name }) => setActiveItem(name)}
+        as={Link}
+        to={"/cart"}
+      >
+        <CartWidget fill="#FFF" width="32px" height="32px" />
+      </Menu.Item>
+    </Menu>
   );
 };
 

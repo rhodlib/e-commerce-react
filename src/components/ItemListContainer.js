@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getFirestore } from "../database/firebase";
-import styles from "./ItemListContainer.module.css";
 import ItemList from "./ItemList";
-import Loader from "./Loader";
+import Loader from "./Spinner";
 
-const ItemListContainer = ({ greeting }) => {
+const ItemListContainer = () => {
   const { categoryId } = useParams();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -32,7 +31,6 @@ const ItemListContainer = ({ greeting }) => {
 
   return (
     <>
-      <p className={styles.container}>{greeting}</p>
       {loading ? (
         <Loader />
       ) : (

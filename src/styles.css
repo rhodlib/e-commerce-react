@@ -4,3 +4,116 @@ html, body {
 * {
     box-sizing: border-box;
 }
+
+.container {
+    height: 100%;
+    padding: 100px;
+    margin-bottom: 100px;
+}
+
+.cardItem {
+    height: 500px;
+}
+
+.cardImage{
+    padding: 200px;
+}
+
+.cardContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/*
+    Cart Custom Styles
+*/
+
+.cartWidgetContainer {
+    display: flex;
+    align-items: center;
+}
+
+.cartCantItems {
+    font-size: 12px;
+    position: relative;
+    right: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    width: 21px;
+    height: 21px;
+    background-color: teal;
+    border: 1px solid #FFF;
+    border-radius: 50%;
+}
+
+/*
+    ItemCount Custom Styles
+*/
+
+.itemCount {
+    width: 200px;
+}
+
+.counterController {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border: 1px solid teal;
+    border-radius: 3px;
+    margin-bottom: 3px;
+}
+
+.controlButton {
+    background-color: #FFF;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.controlButton:hover {
+    color: red;
+}
+
+.onAddButton {
+    width: 100%;
+    background-color: teal;
+    padding: 5px;
+    border-radius: 3px;
+    border: none;
+    color: white;
+}
+
+.onAddButton:hover {
+    cursor: pointer;
+}
+
+/*
+    ItemDetail Custom Styles
+*/
+
+.itemDetailImage {
+    display: block;
+    padding-left: 100px;
+    border-radius: 20px;
+}
+
+.itemDetail {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid teal;
+    border-radius: 20px;
+}
+
+.itemCart {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100% !important;
+}
